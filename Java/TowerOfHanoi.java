@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.Stack;
 
 /**
@@ -89,7 +90,9 @@ public class TowerOfHanoi {
         }
         
         if (count > SYS_OUT_LIMIT) {
-            System.out.println(count + " disks !! That's gonna take " + ((int)Math.pow(2, count) - 1) + " steps. Output will be written to a file. Here we go ...");
+            System.out.println(count + " disks !! That's gonna take " 
+				+ NumberFormat.getIntegerInstance().format((int)Math.pow(2, count) - 1) 
+				+ " steps. Output will be written to a file. Here we go ...");
             tower.filename = System.getProperty("java.io.tmpdir") + "towerOfHanoi.txt";
             tower.out = new PrintWriter(tower.filename);
         } else {
@@ -114,7 +117,7 @@ public class TowerOfHanoi {
         long sec = (elapsed/1000)%60;
         tower.out.println("Elapsed Time : " + (min>0 ? min + " mintue(s) " : "") + (sec>0 ? sec + " second(s)" : elapsed + " milliseconds"));
         
-        tower.out.println("Total Steps : " + tower.stepCount);
+        tower.out.println("Total Steps : " + NumberFormat.getIntegerInstance().format(tower.stepCount));
         tower.out.flush();
         tower.out.close();
         if (count > SYS_OUT_LIMIT) {
